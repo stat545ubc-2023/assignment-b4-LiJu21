@@ -50,16 +50,15 @@ clean_words <- words %>%
   anti_join(stop_words, by = "word")
 
 # Count frequency of each word
-word_count <- clean_words %>%
+word_with_count <- clean_words %>%
   count(word, sort = TRUE)
 
 # Plot the most frequent words
-ggplot(word_count[1:10, ], aes(x = reorder(word, n), y = n)) +
+ggplot(word_with_count[1:10, ], aes(x = reorder(word, -n), y = n)) +
   geom_bar(stat = "identity", fill = "skyblue") +
-  coord_flip() +
   labs(title = "Most Frequent Words in Pride and Prejudice",
        x = "Word",
-       y = "Frequency")
+       y = "Num of Appearance")
 ```
 
 ![](assignmentb4_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
@@ -70,19 +69,21 @@ In my pig latin algorithm, I modified the original algorithm to
 something as follows: 1. For words that end with consonant sounds, all
 letters after the last vowel are placed at the beginning of the word
 sequence. 2. For words ending with vowel sounds, remove the last
-vowel(s)
+vowel(s) 3. After modification, “YAY” will be added to the end of the
+word
 
 ``` r
 #' Funtion of Converting to My Pig Latin
 #'
 #' This function aims to convert words according to a new version of Pig Latin.
 #' The conversion rules are as follows:
-#'   1. For words that end with consonant sounds, all letters after the last vowel 
+#' 1. For words that end with consonant sounds, all letters after the last vowel 
 #'      are placed at the beginning of the word sequence.
-#'   2. For words ending with vowel sounds, remove the last vowel(s)
+#' 2. For words ending with vowel sounds, remove the last vowel(s)
+#' 3. After modification, "YAY" will be added to the end of the word
 #'
 #' @param word A word to be converted.
-#' @return A string referring to the word converted to my Pig Latin.
+#' @return A return string referring to the word converted to my Pig Latin.
 #' @examples
 #' convert_to_my_pig_latin("hello") # "hellYAY"
 #' convert_to_my_pig_latin("apple") # "applYAY"
@@ -126,7 +127,7 @@ test_that("function works fine", {
 })
 ```
 
-    ## Test passed 🎊
+    ## Test passed 🥇
 
 ``` r
 test_that("function is able to handle invalid input", {
@@ -136,4 +137,4 @@ test_that("function is able to handle invalid input", {
 })
 ```
 
-    ## Test passed 🥇
+    ## Test passed 🌈
